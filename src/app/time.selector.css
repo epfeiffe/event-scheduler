@@ -1,0 +1,17 @@
+.time-grid {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.time-grid th, .time-grid td {
+  border: 2px solid #ccc;
+  width: 40px;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+.time-grid td:hover {
+  border: 2px dashed black;
+}
+.time-grid td.selected {
+  background-color: #64b5f6;
+}
