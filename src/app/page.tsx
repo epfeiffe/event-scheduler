@@ -11,7 +11,11 @@ export default function Home() {
     const key = `${day}-${hour}`;
     setSelected((prev) => {
       const copy = new Set(prev);
-      copy.has(key) ? copy.delete(key) : copy.add(key);
+      if (copy.has(key)) {
+        copy.delete(key);
+      } else {
+        copy.add(key);
+      }
       return copy;
     });
   };
