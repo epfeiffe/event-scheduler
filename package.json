@@ -11,10 +11,11 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.5.0",
     "baseui": "^0.0.0-next-2113e1821",
     "next": "15.3.5",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "styletron-engine-monolithic": "^1.0.0",
     "styletron-react": "^6.1.1",
     "ts-node": "^10.9.2"
