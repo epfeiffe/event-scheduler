@@ -11,9 +11,10 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@prisma/client": "^6.16.2",
     "@vercel/analytics": "^1.5.0",
     "baseui": "^0.0.0-next-2113e1821",
-    "next": "15.3.5",
+    "next": "^15.5.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "styletron-engine-monolithic": "^1.0.0",
@@ -32,6 +33,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
     "jsdom": "^26.1.0",
+    "prisma": "^6.16.2",
     "typescript": "^5",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"
