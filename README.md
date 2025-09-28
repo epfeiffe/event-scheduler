@@ -20,6 +20,57 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Project Dependencies
+
+To work with this project, you will need the following tools setup:
+
+### Prisma
+
+To enalbe the Prisma ORM, create a `.env` file with the following contents:
+
+```
+POSTGRES_USER={your username here}
+POSTGRES_PASSWORD={your password here}
+POSTGRES_DB=event-scheduler-db
+DATABASE_URL="postgresql://{your username here}:{your password here}@localhost:5432/event-scheduler-db?schema=public"
+```
+
+Replace `{your username here}` and `{your password here}` with a username and password you are comfortable with using for your postgres DB hosted in a Docker instance.
+
+### Docker
+```
+sudo apt install docker.io
+```
+
+To use docker compose to easily start the container using the docker-compose.yml, you can install docker-compose:
+
+```bash
+sudo apt install docker-compose # install
+docker-compose up -d # start the container
+```
+
+This package won't work on some devices. In that case, you may need to install the Docker Compose CLI plugin v2 instead:
+
+```bash
+mkdir -p ~/.docker/cli-plugins # create directory
+curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose # download the latest binary
+chmod +x ~/.docker/cli-plugins/docker-compose # make the binary executable
+docker compose version  # verify installation
+sudo usermod -aG docker $USER # (optional) give current user permission to access Docker daemon socket
+newgrp docker # (optional) apply permissions whithout having to logout and log back in
+groups # (optional) check user permissions, confirm docker is listed
+docker compose up -d # start the container
+```
+
+
+### VS Code Extensions
+
+These are optional, but will improve the development experience:
+
+1. Prisma - https://marketplace.visualstudio.com/items?itemName=Prisma.prisma
+2. Container Tools - https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-containers
+3. Vitest - https://marketplace.visualstudio.com/items?itemName=vitest.explorer
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
