@@ -26,7 +26,7 @@ To work with this project, you will need the following tools setup:
 
 ### Prisma
 
-To enalbe the Prisma ORM, create a `.env` file with the following contents:
+To enable the Prisma ORM, create a `.env` file in the project root directory with the following content:
 
 ```
 POSTGRES_USER={your username here}
