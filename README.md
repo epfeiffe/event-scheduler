@@ -2,7 +2,13 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+First, initialize the database if you haven't already:
+
+```bash
+npx prisma migrate reset
+```
+
+Second, run the development server:
 
 ```bash
 npm run dev
@@ -62,6 +68,36 @@ groups # (optional) check user permissions, confirm docker is listed
 docker compose up -d # start the container
 ```
 
+#### Additional Docker Commands
+
+```bash
+docker compose up -d # start the container, can also use docker-compose up -d
+docker container ls # list containers
+docker stop $CONTAINER_NAME # stop a running container
+docker rm $CONTAINER_NAME # remove a container
+docker volume ls # list container volumes
+docker volume rm $VOLUME_NAME # remove a container volume
+```
+
+Docker volumes are created to persist local database information between container sessions. Removing them can help if there are credential issues where the $POSTGRES_USER is not recognized. Updates to the schema.prisma or docker-compose.yml files can cause these errors.
+
+#### Additional Database Commands
+```bash
+npx prisma migrate dev --name init # generates new schema migrations, only run if making changes to schema.prisma
+npx prisma migrate reset # drop any existing database, recreate the schema and database, reapply all prior migrations in prisma/migrations folder
+docker exec -it local-postgres psql -U $POSTGRES_USER -d postgres # connect to the database
+```
+
+Once connected to the database, you can run:
+
+```bash
+\c $POSTGRES_DB # connect to the new database
+CREATE DATABASE $POSTGRES_USER # create a new database if necessary
+\dt # list all tables in current schema
+\l # list all databases
+\? # help with postgres commands
+\h # help with SQL commands
+```
 
 ### VS Code Extensions
 
