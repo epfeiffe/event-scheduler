@@ -72,7 +72,8 @@ docker compose up -d # start the container
 
 ```bash
 docker compose up -d # start the container, can also use docker-compose up -d
-docker container ls # list containers
+docker container ls # list running containers
+docker ps -a # list all containers
 docker stop $CONTAINER_NAME # stop a running container
 docker rm $CONTAINER_NAME # remove a container
 docker volume ls # list container volumes
@@ -97,6 +98,12 @@ CREATE DATABASE $POSTGRES_USER # create a new database if necessary
 \l # list all databases
 \? # help with postgres commands
 \h # help with SQL commands
+```
+
+Before testing client side code with ```new PrismaClient()```, run:
+
+```bash
+npm prisma generate
 ```
 
 ### VS Code Extensions
