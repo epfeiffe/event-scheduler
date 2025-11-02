@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    appDir: true,
-  } as any, // cast to any to suppress type error,
+  /* config options here */
 };
 
 export default nextConfig;
