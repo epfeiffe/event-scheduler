@@ -7,6 +7,9 @@ import { Button } from "baseui/button";
 export default function Home() {
   const [selected, setSelected] = useState(new Set());
   const [selecting, setSelecting] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [eventId, setEventId] = useState<number | null>(null);
+
   const toggleSlot = (day: string, hour: string) => {
     const key = `${day}-${hour}`;
     setSelected((prev) => {
@@ -18,6 +21,29 @@ export default function Home() {
       }
       return copy;
     });
+  };
+
+  // TODO: Remove test createEvent and handler
+  // replace with real implementation and unit test
+  const createEvent = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (response.ok) {
+        const event = await response.json();
+        setEventId(event.id);
+        alert(`Event created with ID: ${event.id}`);
+      } else {
+        alert('Failed to create event');
+      }
+    } catch (error) {
+      alert('Error creating event: ' + String(error));
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -64,7 +90,7 @@ export default function Home() {
           ))}
         </tbody>
       </table>
-      {/** TODO: Remove test button */}
+      {/** TODO: Remove test buttons */}
       <Button
         onClick={() => {
           console.log("Selected slots:", Array.from(selected).join(", "));
@@ -72,6 +98,10 @@ export default function Home() {
       >
         Log Selected Slots
       </Button>
+      <Button onClick={createEvent} disabled={loading}>
+        {loading ? 'Creating...' : 'Create Event'}
+      </Button>
+      {eventId && <p>Created Event ID: {eventId}</p>}
     </>
   );
 }
