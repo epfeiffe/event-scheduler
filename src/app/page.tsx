@@ -1,17 +1,16 @@
 'use client';
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { days, hours } from "./constants";
 import "./time.selector.css";
 import { Button } from "baseui/button";
 
 export default function Home() {
   const [selected, setSelected] = useState(new Set());
-  const [selecting, setSelecting] = useState(true);
+  const selecting = useRef<boolean>(true);
   const [loading, setLoading] = useState(false);
   const [eventId, setEventId] = useState<number | null>(null);
 
-  const toggleSlot = (day: string, hour: string) => {
-    const key = `${day}-${hour}`;
+  const toggleSlot = (key: string) => {
     setSelected((prev) => {
       const copy = new Set(prev);
       if (copy.has(key)) {
@@ -66,21 +65,16 @@ export default function Home() {
                   <td
                     key={key}
                     className={isActive ? "selected" : ""}
-                    onClick={() => toggleSlot(day, hour)}
+                    onClick={() => toggleSlot(key)}
                     onMouseDown={(e) => {
                       e.preventDefault();
-                      if (isActive) {
-                        setSelecting(false);
-                      } else {
-                        setSelecting(true);
-                      }
+                      selecting.current = !isActive;
                     }}
                     onMouseMove={(e) => {
                       e.preventDefault();
-                      if (e.buttons === 1 && !isActive && selecting) { // Left mouse button is pressed
-                        toggleSlot(day, hour);
-                      } else if (e.buttons === 1 && isActive && !selecting) {
-                        toggleSlot(day, hour);
+                      if (e.buttons === 1) { // Left mouse button is pressed
+                        if (selecting.current && !isActive) toggleSlot(key);
+                        else if (!selecting.current && isActive) toggleSlot(key);
                       }
                     }}
                   />
